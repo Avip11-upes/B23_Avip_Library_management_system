@@ -27,3 +27,24 @@ Murder on the Orient Express|127|260|Agatha Christie|Mystery
 The Little Prince|128|190|Antoine de Saint-Exupery|Fable
 The Midnight Library|129|340|Matt Haig|Fantasy
 A Man Called Ove|130|310|Fredrik Backman|Fiction
+Dune|131|420|Frank Herbert|Science Fiction
+Jane Eyre|132|280|Charlotte Bronte|Classic
+The Shining|133|350|Stephen King|Horror
+Gone Girl|134|320|Gillian Flynn|Thriller
+Educated|135|380|Tara Westover|Memoir
+The 7 Habits of Highly Effective People|136|450|Stephen R. Covey|Self Help
+The Name of the Wind|137|470|Patrick Rothfuss|Fantasy
+Norwegian Wood|138|300|Haruki Murakami|Fiction
+The Book of Joy|139|360|Dalai Lama|Spirituality
+The Hunger Games|140|330|Suzanne Collins|Dystopian
+The Old Man and the Sea|141|190|Ernest Hemingway|Classic
+The Immortal Life of Henrietta Lacks|142|400|Rebecca Skloot|Science
+The Shadow of the Wind|143|390|Carlos Ruiz Zafon|Mystery
+Thinking, Fast and Slow|144|480|Daniel Kahneman|Psychology
+The Secret Garden|145|230|Frances Hodgson Burnett|Children
+Life of Pi|146|310|Yann Martel|Adventure
+The Lean Startup|147|370|Eric Ries|Business
+And Then There Were None|148|250|Agatha Christie|Mystery
+The Color Purple|149|290|Alice Walker|Fiction
+The Road|150|270|Cormac McCarthy|Dystopian
+Man's Search for Meaning|151|240|Viktor E. Frankl|Psychology
