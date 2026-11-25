@@ -6,15 +6,9 @@
 
 #include <time.h>
 
-#include <ctype.h>
-
-
-
 #define MAX_BOOKS 100
 
 #define MAX_LOANS 200
-
-
 
 struct Book
 
@@ -32,8 +26,6 @@ struct Book
 
 };
 
-
-
 struct Loan
 
 {
@@ -48,15 +40,11 @@ struct Loan
 
 };
 
-
-
 struct Book books[MAX_BOOKS];
 
 struct Loan loans[MAX_LOANS];
 
 int count = 0, loanCount = 0;
-
-
 
 /* Clears extra characters left in the input buffer */
 
@@ -69,8 +57,6 @@ void clearInputBuffer()
     while ((ch = getchar()) != '\n' && ch != EOF);
 
 }
-
-
 
 /* Reads a complete line */
 
@@ -123,7 +109,35 @@ int caseInsensitiveCompare(const char first[], const char second[])
 
     return 1;
 }
-
+/* Compares two strings without considering uppercase/lowercase */
+int caseInsensitiveCompare(const char first[], const char second[])
+{
+    int start1 = 0, start2 = 0;
+    int end1 = (int)strlen(first) - 1;
+    int end2 = (int)strlen(second) - 1;
+    int i, len1, len2;
+    /* Ignore spaces at the beginning of both strings */
+    while (first[start1] != '\0' && isspace((unsigned char)first[start1]))
+        start1++;
+    while (second[start2] != '\0' && isspace((unsigned char)second[start2]))
+        start2++;
+    /* Ignore spaces at the end of both strings */
+    while (end1 >= start1 && isspace((unsigned char)first[end1]))
+        end1--;
+    while (end2 >= start2 && isspace((unsigned char)second[end2]))
+        end2--;
+    len1 = end1 - start1 + 1;
+    len2 = end2 - start2 + 1;
+    if (len1 != len2)
+        return 0;
+    for (i = 0; i < len1; i++)
+    {
+        if (tolower((unsigned char)first[start1 + i]) !=
+            tolower((unsigned char)second[start2 + i]))
+            return 0;
+    }
+    return 1;
+}
 /* Loads the book catalogue from books.txt */
 
 void loadBooks()
@@ -134,13 +148,9 @@ void loadBooks()
 
     char line[400];
 
-
-
     count = 0;
 
     fp = fopen("books.txt", "r");
-
-
 
     if (fp == NULL)
 
@@ -151,8 +161,6 @@ void loadBooks()
         return;
 
     }
-
-
 
     while (count < MAX_BOOKS && fgets(line, sizeof(line), fp) != NULL)
 
@@ -178,8 +186,6 @@ void loadBooks()
 
 }
 
-
-
 /* Saves the current catalogue to books.txt */
 
 void saveBooks()
@@ -189,8 +195,6 @@ void saveBooks()
     FILE *fp = fopen("books.txt", "w");
 
     int i;
-
-
 
     if (fp == NULL)
 
@@ -202,8 +206,6 @@ void saveBooks()
 
     }
 
-
-
     for (i = 0; i < count; i++)
 
         fprintf(fp, "%s|%d|%.2f|%s|%s\n", books[i].name,
@@ -212,13 +214,9 @@ void saveBooks()
 
                 books[i].genre);
 
-
-
     fclose(fp);
 
 }
-
-
 
 /* Loads active borrowing records from loans.txt */
 
@@ -230,19 +228,13 @@ void loadLoans()
 
     char line[300];
 
-
-
     loanCount = 0;
 
     fp = fopen("loans.txt", "r");
 
-
-
     if (fp == NULL)
 
         return; /* File is created when the first book is borrowed */
-
-
 
     while (loanCount < MAX_LOANS && fgets(line, sizeof(line), fp) != NULL)
 
@@ -264,8 +256,6 @@ void loadLoans()
 
 }
 
-
-
 /* Saves active borrowing records to loans.txt */
 
 void saveLoans()
@@ -275,8 +265,6 @@ void saveLoans()
     FILE *fp = fopen("loans.txt", "w");
 
     int i;
-
-
 
     if (fp == NULL)
 
@@ -288,8 +276,6 @@ void saveLoans()
 
     }
 
-
-
     for (i = 0; i < loanCount; i++)
 
         fprintf(fp, "%d|%d|%s|%s\n", loans[i].sap,
@@ -298,13 +284,9 @@ void saveLoans()
 
                 loans[i].borrowDate);
 
-
-
     fclose(fp);
 
 }
-
-
 
 /* Displays all books */
 
@@ -313,8 +295,6 @@ void displayBooks()
 {
 
     int i;
-
-
 
     if (count == 0)
 
@@ -326,8 +306,6 @@ void displayBooks()
 
     }
 
-
-
     printf("\n==================== BOOK CATALOGUE ====================\n");
 
     printf("%-25s %-10s %-10s %-25s %-15s\n",
@@ -335,8 +313,6 @@ void displayBooks()
            "Book Name", "Book ID", "Price", "Author", "Genre");
 
     printf("-------------------------------------------------------------------------------\n");
-
-
 
     for (i = 0; i < count; i++)
 
@@ -346,13 +322,9 @@ void displayBooks()
 
                books[i].author, books[i].genre);
 
-
-
     printf("-------------------------------------------------------------------------------\n");
 
 }
-
-
 
 /* Finds a book using its ID */
 
@@ -372,8 +344,6 @@ int findBook(int id)
 
 }
 
-
-
 /* Checks whether a book is currently borrowed */
 
 int isBookBorrowed(int id)
@@ -391,8 +361,6 @@ int isBookBorrowed(int id)
     return 0;
 
 }
-
-
 
 /* Checks whether this student already has this book */
 
@@ -412,8 +380,6 @@ int studentHasBook(int sap, int id)
 
 }
 
-
-
 /* Returns today's date in YYYY-MM-DD format */
 
 void getToday(char date[])
@@ -428,8 +394,6 @@ void getToday(char date[])
 
 }
 
-
-
 /* Converts YYYY-MM-DD into a time value */
 
 time_t convertDate(char date[])
@@ -440,13 +404,9 @@ time_t convertDate(char date[])
 
     struct tm dateParts = {0};
 
-
-
     if (sscanf(date, "%4d-%2d-%2d", &year, &month, &day) != 3)
 
         return (time_t)-1;
-
-
 
     dateParts.tm_year = year - 1900;
 
@@ -456,13 +416,9 @@ time_t convertDate(char date[])
 
     dateParts.tm_isdst = -1;
 
-
-
     return mktime(&dateParts);
 
 }
-
-
 
 /* Calculates the number of days between two dates */
 
@@ -474,19 +430,13 @@ int daysBetween(char start[], char end[])
 
     time_t second = convertDate(end);
 
-
-
     if (first == (time_t)-1 || second == (time_t)-1 || second < first)
 
         return -1;
 
-
-
     return (int)(difftime(second, first) / (60 * 60 * 24));
 
 }
-
-
 
 /* Student borrows a book */
 
@@ -496,13 +446,9 @@ void rentBook(int sap)
 
     int id, index;
 
-
-
     loadBooks();
 
     loadLoans();
-
-
 
     if (count == 0)
 
@@ -514,13 +460,9 @@ void rentBook(int sap)
 
     }
 
-
-
     displayBooks();
 
     printf("\nEnter the Book ID you want to borrow: ");
-
-
 
     if (scanf("%d", &id) != 1)
 
@@ -536,11 +478,7 @@ void rentBook(int sap)
 
     clearInputBuffer();
 
-
-
     index = findBook(id);
-
-
 
     if (index == -1)
 
@@ -552,8 +490,6 @@ void rentBook(int sap)
 
     }
 
-
-
     if (isBookBorrowed(id))
 
     {
@@ -563,8 +499,6 @@ void rentBook(int sap)
         return;
 
     }
-
-
 
     if (studentHasBook(sap, id))
 
@@ -576,8 +510,6 @@ void rentBook(int sap)
 
     }
 
-
-
     if (loanCount >= MAX_LOANS)
 
     {
@@ -587,8 +519,6 @@ void rentBook(int sap)
         return;
 
     }
-
-
 
     loans[loanCount].sap = sap;
 
@@ -600,11 +530,7 @@ void rentBook(int sap)
 
     loanCount++;
 
-
-
     saveLoans();
-
-
 
     printf("\nYou have successfully borrowed \"%s\".\n", books[index].name);
 
@@ -616,8 +542,6 @@ void rentBook(int sap)
 
 }
 
-
-
 /* Student purchases a book (original feature retained) */
 
 void purchaseBook()
@@ -627,8 +551,6 @@ void purchaseBook()
     int id, index;
 
     char paid;
-
-
 
     loadBooks();
 
@@ -642,13 +564,9 @@ void purchaseBook()
 
     }
 
-
-
     displayBooks();
 
     printf("\nEnter the Book ID you want to purchase: ");
-
-
 
     if (scanf("%d", &id) != 1)
 
@@ -664,8 +582,6 @@ void purchaseBook()
 
     clearInputBuffer();
 
-
-
     index = findBook(id);
 
     if (index == -1)
@@ -678,21 +594,15 @@ void purchaseBook()
 
     }
 
-
-
     printf("\nBook Name: %s\n", books[index].name);
 
     printf("Price: Rs. %.2f\n", books[index].price);
 
     printf("\nHave you paid? (y/n): ");
 
-
-
     scanf(" %c", &paid);
 
     clearInputBuffer();
-
-
 
     if (paid == 'y' || paid == 'Y')
 
@@ -714,8 +624,6 @@ void purchaseBook()
 
 }
 
-
-
 /* Original explore/filter feature retained */
 
 void exploreLibrary()
@@ -732,8 +640,6 @@ void exploreLibrary()
 
     float minPrice = 0, maxPrice = 0;
 
-
-
     loadBooks();
 
     if (count == 0)
@@ -746,11 +652,7 @@ void exploreLibrary()
 
     }
 
-
-
     printf("\n========== EXPLORE THE LIBRARY ==========\n");
-
-
 
     printf("\nDo you want to filter by author? (y/n): ");
 
@@ -770,8 +672,6 @@ void exploreLibrary()
 
     }
 
-
-
     printf("\nDo you want to filter by genre? (y/n): ");
 
     scanf(" %c", &answer);
@@ -790,8 +690,6 @@ void exploreLibrary()
 
     }
 
-
-
     printf("\nDo you want to filter by book name? (y/n): ");
 
     scanf(" %c", &answer);
@@ -809,8 +707,6 @@ void exploreLibrary()
         readLine(name, sizeof(name));
 
     }
-
-
 
     printf("\nDo you want to filter by price range? (y/n): ");
 
@@ -866,8 +762,6 @@ void exploreLibrary()
 
     }
 
-
-
     printf("\nDo you want to filter by Book ID? (y/n): ");
 
     scanf(" %c", &answer);
@@ -898,8 +792,6 @@ void exploreLibrary()
 
     }
 
-
-
     printf("\n================ SEARCH RESULTS ================\n");
 
     printf("%-25s %-10s %-10s %-25s %-15s\n",
@@ -908,25 +800,17 @@ void exploreLibrary()
 
     printf("-------------------------------------------------------------------------------\n");
 
-
-
     for (i = 0; i < count; i++)
 
     {
 
         int match = 1;
-
-        if (useAuthor && !caseInsensitiveCompare(author, books[i].author)) match = 0;
-
-        if (useGenre && !caseInsensitiveCompare(genre, books[i].genre)) match = 0;
-
-        if (useName && !caseInsensitiveCompare(name, books[i].name)) match = 0;
-
+        if (useAuthor && strcmp(author, books[i].author) != 0) match = 0;
+        if (useGenre && strcmp(genre, books[i].genre) != 0) match = 0;
+        if (useName && strcmp(name, books[i].name) != 0) match = 0;
         if (usePrice && (books[i].price < minPrice || books[i].price > maxPrice)) match = 0;
 
         if (useID && books[i].id != id) match = 0;
-
-
 
         if (match)
 
@@ -944,8 +828,6 @@ void exploreLibrary()
 
     }
 
-
-
     printf("-------------------------------------------------------------------------------\n");
 
     if (found == 0)
@@ -958,8 +840,6 @@ void exploreLibrary()
 
 }
 
-
-
 /* Student returns their borrowed book; fine is calculated from dates */
 
 void returnBook(int sap)
@@ -970,13 +850,9 @@ void returnBook(int sap)
 
     char today[11];
 
-
-
     loadLoans();
 
     printf("\nEnter the Book ID you want to return: ");
-
-
 
     if (scanf("%d", &id) != 1)
 
@@ -992,15 +868,11 @@ void returnBook(int sap)
 
     clearInputBuffer();
 
-
-
     for (i = 0; i < loanCount; i++)
 
         if (loans[i].sap == sap && loans[i].bookID == id)
 
             break;
-
-
 
     if (i == loanCount)
 
@@ -1012,13 +884,9 @@ void returnBook(int sap)
 
     }
 
-
-
     getToday(today);
 
     days = daysBetween(loans[i].borrowDate, today);
-
-
 
     if (days < 0)
 
@@ -1029,8 +897,6 @@ void returnBook(int sap)
         return;
 
     }
-
-
 
     /* Fine policy retained from the original program:
 
@@ -1050,8 +916,6 @@ void returnBook(int sap)
 
         fine = (7 * 10) + ((days - 21) * 20);
 
-
-
     printf("\nBook returned successfully!\n");
 
     printf("Book Name: %s\n", loans[i].bookName);
@@ -1064,8 +928,6 @@ void returnBook(int sap)
 
     printf("Fine: Rs. %d\n", fine);
 
-
-
     if (fine == 0)
 
         printf("No fine! Thank you for returning on time.\n");
@@ -1073,8 +935,6 @@ void returnBook(int sap)
     else
 
         printf("Please pay the fine amount.\n");
-
-
 
     /* Remove the active loan record after return */
 
@@ -1088,8 +948,6 @@ void returnBook(int sap)
 
 }
 
-
-
 /* Admin adds a new book */
 
 void addBook()
@@ -1097,8 +955,6 @@ void addBook()
 {
 
     struct Book newBook;
-
-
 
     loadBooks();
 
@@ -1111,8 +967,6 @@ void addBook()
         return;
 
     }
-
-
 
     printf("\nEnter new book name: ");
 
@@ -1134,8 +988,6 @@ void addBook()
 
     clearInputBuffer();
 
-
-
     if (findBook(newBook.id) != -1)
 
     {
@@ -1145,8 +997,6 @@ void addBook()
         return;
 
     }
-
-
 
     printf("Enter price: ");
 
@@ -1164,8 +1014,6 @@ void addBook()
 
     clearInputBuffer();
 
-
-
     printf("Enter author: ");
 
     readLine(newBook.author, sizeof(newBook.author));
@@ -1173,8 +1021,6 @@ void addBook()
     printf("Enter genre: ");
 
     readLine(newBook.genre, sizeof(newBook.genre));
-
-
 
     books[count] = newBook;
 
@@ -1186,8 +1032,6 @@ void addBook()
 
 }
 
-
-
 /* Admin removes a book; a currently borrowed book cannot be removed */
 
 void removeBook()
@@ -1196,15 +1040,11 @@ void removeBook()
 
     int id, index, i;
 
-
-
     loadBooks();
 
     loadLoans();
 
     displayBooks();
-
-
 
     printf("\nEnter the Book ID you want to remove: ");
 
@@ -1221,8 +1061,6 @@ void removeBook()
     }
 
     clearInputBuffer();
-
-
 
     index = findBook(id);
 
@@ -1246,8 +1084,6 @@ void removeBook()
 
     }
 
-
-
     for (i = index; i < count - 1; i++)
 
         books[i] = books[i + 1];
@@ -1260,8 +1096,6 @@ void removeBook()
 
 }
 
-
-
 /* Admin credentials are stored in admin.txt as username|password */
 
 int adminLogin(char username[], char password[])
@@ -1272,8 +1106,6 @@ int adminLogin(char username[], char password[])
 
     char savedUser[50], savedPassword[50];
 
-
-
     if (fp == NULL)
 
     {
@@ -1283,8 +1115,6 @@ int adminLogin(char username[], char password[])
         return 0;
 
     }
-
-
 
     if (fscanf(fp, "%49[^|]|%49s", savedUser, savedPassword) != 2)
 
@@ -1300,15 +1130,11 @@ int adminLogin(char username[], char password[])
 
     fclose(fp);
 
-
-
     return strcmp(username, savedUser) == 0 &&
 
            strcmp(password, savedPassword) == 0;
 
 }
-
-
 
 /* Main program */
 
@@ -1319,8 +1145,6 @@ int main()
     int role, sap, choice;
 
     char username[50], password[50];
-
-
 
     printf("========================================\n");
 
@@ -1334,8 +1158,6 @@ int main()
 
     printf("Enter your choice: ");
 
-
-
     if (scanf("%d", &role) != 1)
 
     {
@@ -1347,8 +1169,6 @@ int main()
     }
 
     clearInputBuffer();
-
-
 
     if (role == 1)
 
@@ -1378,11 +1198,7 @@ int main()
 
         }
 
-
-
         printf("\nStudent login successful! Welcome, SAP ID %d.\n", sap);
-
-
 
         do
 
@@ -1402,8 +1218,6 @@ int main()
 
             printf("Enter your choice: ");
 
-
-
             if (scanf("%d", &choice) != 1)
 
             {
@@ -1417,8 +1231,6 @@ int main()
             }
 
             clearInputBuffer();
-
-
 
             switch (choice)
 
@@ -1454,8 +1266,6 @@ int main()
 
         readLine(password, sizeof(password));
 
-
-
         if (!adminLogin(username, password))
 
         {
@@ -1466,11 +1276,7 @@ int main()
 
         }
 
-
-
         printf("\nAdmin login successful!\n");
-
-
 
         do
 
@@ -1490,8 +1296,6 @@ int main()
 
             printf("Enter your choice: ");
 
-
-
             if (scanf("%d", &choice) != 1)
 
             {
@@ -1505,8 +1309,6 @@ int main()
             }
 
             clearInputBuffer();
-
-
 
             switch (choice)
 
@@ -1533,8 +1335,6 @@ int main()
     else
 
         printf("\nInvalid login option.\n");
-
-
 
     return 0;
 
