@@ -8,3 +8,22 @@ The Psychology of Money|107|280.00|Morgan Housel|Finance
 Ikigai|108|299.00|Hector Garcia|Self Help
 1984|109|199.00|George Orwell|Dystopian
 The Great Gatsby|110|180.00|F. Scott Fitzgerald|Classic
+Pride and Prejudice|112|220|Jane Austen|Romance
+The Catcher in the Rye|113|260|J.D. Salinger|Classic
+The Da Vinci Code|114|330|Dan Brown|Thriller
+The Silent Patient|115|310|Alex Michaelides|Mystery
+A Brief History of Time|116|400|Stephen Hawking|Science
+Sapiens|117|499|Yuval Noah Harari|History
+The Power of Now|118|350|Eckhart Tolle|Self Help
+The Fault in Our Stars|119|280|John Green|Romance
+The Book Thief|120|390|Markus Zusak|Historical Fiction
+The Lord of the Rings|121|599|J.R.R. Tolkien|Fantasy
+The Kite Runner|122|320|Khaled Hosseini|Fiction
+The Girl on the Train|123|299|Paula Hawkins|Thriller
+Think and Grow Rich|124|240|Napoleon Hill|Finance
+The Martian|125|370|Andy Weir|Science Fiction
+Becoming|126|450|Michelle Obama|Biography
+Murder on the Orient Express|127|260|Agatha Christie|Mystery
+The Little Prince|128|190|Antoine de Saint-Exupery|Fable
+The Midnight Library|129|340|Matt Haig|Fantasy
+A Man Called Ove|130|310|Fredrik Backman|Fiction
