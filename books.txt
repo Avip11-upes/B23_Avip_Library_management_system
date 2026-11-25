@@ -1,0 +1,10 @@
+The Alchemist|101|299.00|Paulo Coelho|Fiction
+Harry Potter|102|450.00|J.K. Rowling|Fantasy
+Atomic Habits|103|399.00|James Clear|Self Help
+The Hobbit|104|350.00|J.R.R. Tolkien|Fantasy
+Wings of Fire|105|250.00|A.P.J. Abdul Kalam|Biography
+Rich Dad Poor Dad|106|320.00|Robert Kiyosaki|Finance
+The Psychology of Money|107|280.00|Morgan Housel|Finance
+Ikigai|108|299.00|Hector Garcia|Self Help
+1984|109|199.00|George Orwell|Dystopian
+The Great Gatsby|110|180.00|F. Scott Fitzgerald|Classic
